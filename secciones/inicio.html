@@ -1,0 +1,163 @@
+<!-- ══ SCREEN 1: CANCIÓN ══ -->
+<div class="screen active visible" id="screen-song">
+  <p class="song-eyebrow">Una canción para ti</p>
+
+  <div class="album-cover-wrap">
+    <img
+      class="album-cover"
+      src="assets/img/album.jpg"
+      alt="Ultra Sodade – Kevin Kaarl"
+      onerror="this.style.background='linear-gradient(135deg,#C4572B,#E8883A)';this.style.height='320px';this.removeAttribute('src')"
+    />
+  </div>
+
+  <div class="song-info">
+    <div class="song-title">Dime</div>
+    <div class="song-artist">Kevin Kaarl · Ultra Sodade</div>
+  </div>
+
+  <a
+    class="spotify-btn"
+    href="https://open.spotify.com/intl-es/track/4w90TNgWBYQVOJ7WODqnFU?si=35a831a639a74149"
+    target="_blank"
+    rel="noopener"
+  >
+    <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+    </svg>
+    Escuchar en Spotify
+  </a>
+
+  <button class="next-btn" onclick="goTo('screen-question')">
+    Hay algo más para ti ↓
+  </button>
+</div>
+
+<!-- ══ SCREEN 2: PREGUNTA ══ -->
+<div class="screen" id="screen-question">
+  <div class="question-heading">
+    <span>¿Quieres??</span>
+  </div>
+  <p class="question-sub">Ya dime...</p>
+
+  <div class="btn-group">
+    <button class="btn-yes" id="btn-yes" onclick="goToLetter()">
+      Sí 💛
+    </button>
+    <button class="btn-no" id="btn-no" onmouseover="runAway(this)" onclick="runAway(this)">
+      No
+    </button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: CARTA ══ -->
+<div class="screen" id="screen-letter">
+  <div class="letter-wrap">
+    <div class="lines"></div>
+    <div class="letter-date">Junio, 2025</div>
+    <div class="letter-body">
+   <p>Arianna, mi amor bonito,</p>
+    <p>
+      Hay canciones que uno escucha y siente que alguien las escribió
+      exactamente para plasmar lo que lleva dentro. <em>Dime</em> de Kevin Kaarl
+      es esa canción para mí; no hay una sola vez que la escuche y no estés tú en mi mente.
+    </p>
+    <p>
+      Cada que suena, me imagino todo lo que dice la letra contigo. Por eso, hoy te lo 
+      pregunto con el corazón en la mano: ¿me dirías que sí a todo? Porque, justo como 
+      dice la canción, quiero cuidarte, quiero que nos vayamos lejos y que construyamos 
+      nuestro propio mundo. 
+    </p>
+    <p>
+      Arianna, te amo. Quiero que seas mía y yo ser tuyo, y que me permitas quedarme 
+      a tu lado para siempre.
+    </p>
+    </div>
+    <div class="letter-signature">Con todo mi amor ❤️🩶</div>
+  </div>
+
+  <div class="letter-heart">❤️🩶</div>
+
+  <div class="letter-footer">
+    <a href="https://open.spotify.com/intl-es/track/4w90TNgWBYQVOJ7WODqnFU?si=35a831a639a74149" target="_blank" rel="noopener">
+      ♫ Escuchar Dime · Kevin Kaarl ❤️🩶
+    </a>
+  </div>
+</div>
+
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+  // ── Mostrar pantalla activa ──
+  function goTo(id) {
+    document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active', 'visible');
+    });
+    const target = document.getElementById(id);
+    if(target) {
+        target.classList.add('active');
+        requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('visible')));
+        window.scrollTo(0, 0);
+    }
+  }
+
+  // Activar primera pantalla
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const primerScreen = document.getElementById('screen-song');
+    if(primerScreen) primerScreen.classList.add('visible');
+  }));
+
+  // ── Botón "No" que se escapa ──
+  var noMoves = 0;
+  function runAway(btn) {
+    noMoves++;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const bw = btn.offsetWidth;
+    const bh = btn.offsetHeight;
+
+    const x = Math.random() * (vw - bw - 40) + 20;
+    const y = Math.random() * (vh - bh - 40) + 20;
+
+    btn.style.position = 'fixed';
+    btn.style.left = x + 'px';
+    btn.style.top  = y + 'px';
+    btn.style.zIndex = 100;
+    btn.style.margin = '0';
+
+    // El "Sí" crece un poco más cada vez
+    const yesBtn = document.getElementById('btn-yes');
+    if(yesBtn) {
+        const currentSize = parseFloat(getComputedStyle(yesBtn).fontSize);
+        const newSize = Math.min(currentSize + 2, 28);
+        yesBtn.style.fontSize = newSize + 'px';
+        yesBtn.style.padding  = `${0.9 + noMoves * 0.08}rem ${2.8 + noMoves * 0.15}rem`;
+    }
+  }
+
+  // ── Ir a la carta con confetti ──
+  function goToLetter() {
+    launchConfetti();
+    setTimeout(() => goTo('screen-letter'), 400);
+  }
+
+  // ── Confetti ──
+  function launchConfetti() {
+    const container = document.getElementById('confetti');
+    if(!container) return;
+    const colors = ['#E8883A','#D4A843','#C4572B','#F5EDD8','#7A3B1E','#1DB954'];
+    for (let i = 0; i < 80; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left     = Math.random() * 100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.width    = (6 + Math.random() * 8) + 'px';
+      piece.style.height   = (6 + Math.random() * 8) + 'px';
+      piece.style.animationDuration = (1.2 + Math.random() * 2) + 's';
+      piece.style.animationDelay   = (Math.random() * 0.5) + 's';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      container.appendChild(piece);
+      piece.addEventListener('animationend', () => piece.remove());
+    }
+  }
+</script>
