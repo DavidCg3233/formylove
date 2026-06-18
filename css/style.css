@@ -349,3 +349,27 @@ html, body {
   /* Líneas como de libreta */
   background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 28px, rgba(180,150,100,0.15) 28px, rgba(180,150,100,0.15) 29px);
 }
+
+/* =========================================
+   AVISO SORPRESA 25 DE JULIO
+   ========================================= */
+.aviso-sorpresa {
+  margin-top: 5rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border: 1px dashed var(--gold);
+  border-radius: 8px;
+  background: rgba(212, 168, 67, 0.05); /* Un fondo dorado muy sutil */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fade-bob 3s ease-in-out infinite; /* Reutilizamos tu animación flotante */
+}
+
+.aviso-sorpresa p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
