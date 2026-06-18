@@ -318,8 +318,8 @@ html, body {
 .polaroid-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta la foto sin deformarla */
-  background: var(--rust);
+  object-fit: contain; 
+  background: var(--paper); /* El fondo ahora camufla los espacios con el color del papel */
 }
 
 .polaroid-caption {
