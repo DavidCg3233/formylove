@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function iniciarContador() {
   // Establecemos el objetivo: 25 de junio del año en curso a las 00:00:00
   const añoActual = new Date().getFullYear();
-  const fechaObjetivo = new Date(`June 18, ${añoActual} 00:00:00`).getTime();
+  const fechaObjetivo = new Date(`June 25, ${añoActual} 00:00:00`).getTime();
 
   // El intervalo se ejecuta cada 1 segundo
   const intervalo = setInterval(function() {
