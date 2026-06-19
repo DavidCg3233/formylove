@@ -373,3 +373,102 @@ html, body {
   color: var(--gold);
   letter-spacing: 0.05em;
 }
+
+
+/* =========================================
+   ESTILOS DE LA CUPONERA
+   ========================================= */
+.cuponera-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cupon {
+  background: var(--paper);
+  color: var(--warm-dk);
+  border: 2px dashed var(--amber);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Efecto de recorte a los lados para parecer ticket */
+.cupon::before, .cupon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: var(--warm-dk); /* Debe coincidir con el fondo de la pantalla */
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.cupon::before { left: -12px; }
+.cupon::after { right: -12px; }
+
+.cupon:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(232,136,58,0.4);
+}
+
+.cupon.canjeado {
+  opacity: 0.5;
+  filter: grayscale(80%);
+  pointer-events: none;
+  border-color: #888;
+}
+
+/* =========================================
+   ANIMACIÓN DE LAS FLORES (DIBUJO)
+   ========================================= */
+.seccion-flores {
+  display: none; /* Se oculta al principio */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+}
+
+.rosa-dibujo path {
+  fill: transparent;
+  stroke: var(--rust); /* Color de la línea (Naranja oscuro/rojizo) */
+  stroke-width: 2;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  animation: dibujarRosa 4s ease-in-out forwards;
+}
+
+/* Efecto de dibujo */
+@keyframes dibujarRosa {
+  0% { stroke-dashoffset: 1500; fill: transparent; }
+  80% { stroke-dashoffset: 0; fill: transparent; }
+  100% { stroke-dashoffset: 0; fill: rgba(196, 87, 43, 0.15); /* Se rellena sutilmente al final */ }
+}
+
+.mensaje-te-amo {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 3rem;
+  color: var(--cream);
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1.5s ease;
+}
+
+.mensaje-te-amo.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
