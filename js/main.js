@@ -260,7 +260,7 @@ function canjearCupon(elemento) {
     elemento.innerHTML = "<s>" + nombreCupon + "</s> <br><span style='font-size: 0.85rem; color: #555; margin-top: 0.5rem; display: block;'>(Redirigiendo a WhatsApp...)</span>";
 
     // Redirigimos a WhatsApp
-    const mensaje = `¡Mi amor! ❤️ Quiero hacer válido este cupón:\n\n🎟️ *${nombreCupon}*\n\n¿Cuándo me lo cumples? 🥰`;
+    const mensaje = `¡Mi amor!  Quiero hacer válido este cupón:\n\n *${nombreCupon}*\n\n¿Cuándo me lo cumples? `;
     const url = `https://wa.me/${tuNumero}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
   }
