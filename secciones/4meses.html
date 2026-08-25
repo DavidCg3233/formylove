@@ -1,0 +1,92 @@
+<!-- PANTALLA DE ESPERA (CONTADOR 4 MESES) -->
+<div id="espera-4m" style="background: radial-gradient(ellipse at 50% 50%, #3D1A08 0%, var(--warm-dk) 80%); width: 100%; min-height: calc(100vh - 60px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
+  <div style="font-size: 4.5rem; margin-bottom: 1rem; animation: fade-bob 3s ease-in-out infinite;">🕰️</div>
+  <h2 class="question-heading" style="margin-bottom: 2rem;">Felices <br><span>4 Meses</span></h2>
+  
+  <div class="aviso-sorpresa" style="border: 1px dashed var(--gold); display: flex; flex-direction: column; gap: 0.8rem; padding: 1.5rem 2.5rem; border-radius: 8px;">
+    <span id="subtitulo-4m" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--gold);">Esta carta se abrirá el 25 de agosto...</span>
+    <span id="contador-4m" style="font-family: 'Inter', sans-serif; font-size: 1.8rem; font-weight: bold; color: var(--cream); letter-spacing: 2px;">00d 00h 00m 00s</span>
+  </div>
+</div>
+
+<!-- CONTENIDO DESBLOQUEADO (IMAGEN, CARTA Y CUPÓN) -->
+<div id="contenido-4m" style="display: none; background: radial-gradient(ellipse at 50% 50%, #3D1A08 0%, var(--warm-dk) 80%); width: 100%; min-height: calc(100vh - 60px); flex-direction: column; align-items: center; justify-content: flex-start; padding: 4rem 2rem; text-align: center;">
+  
+  <div style="width: 100%; max-width: 600px; animation: fadeIn 1.2s ease;">
+    
+    <!-- ESPACIO PARA LA IMAGEN -->
+    <div class="album-cover-wrap" style="margin: 0 auto 3rem auto;">
+      <!-- Cambia 'foto-4meses.jpg' por la imagen que quieras usar -->
+      <img src="assets/img/4meses.jpg" alt="Felices 4 meses" class="album-cover">
+    </div>
+
+    <!-- LA CARTA -->
+    <div class="letter-wrap" style="text-align: left; margin: 0 auto 3rem auto; animation: none;">
+      <div class="letter-date">25 de Agosto</div>
+      <div class="letter-body">
+        <p><strong>Mi hermosa Ari,</strong></p>
+        
+        <p>Hoy, 25 de agosto, cumplimos 4 meses desde que me diste ese "sí". Sinceramente, sé que es muy poco tiempo en comparación con toda la vida que tengo planeada a tu lado, pero en estos meses ya hemos construido una infinidad de recuerdos. Hemos compartido tantas cosas, tanto buenas como difíciles; nos hemos conocido mucho más a fondo y, aunque hemos atravesado situaciones que nos han movido el piso, aquí seguimos. Juntos, más fuertes que antes, y creo que eso es lo más valioso de nuestro amor.</p>
+        
+        <p>Me sigo enamorando de ti cada día más. Cuando te digo que me encantas, es porque de verdad me fascinas. A veces simplemente me quedo viéndote, admirando a la gran mujer que eres. Son tantas las pequeñas cosas que me vuelven loco de ti que muchas veces me quedo sin palabras y termino respondiéndote un simple "porque sí". Pero la verdad es que, en esos momentos, mi cabeza está haciendo un cortocircuito por la avalancha de emociones hermosas que me provoca el solo hecho de mirarte.</p>
+        
+        <p>Me das una paz increíble y, al mismo tiempo, me llenas de una energía que me impulsa a ser mejor hombre para ti. Quiero seguir sumando meses, años y experiencias a tu lado. Quiero seguir riendo contigo, aprendiendo de ti y demostrándote que lo nuestro es a prueba de todo.</p>
+        
+        <p>Para celebrar nuestro día, he decidido darte el control total. Revisa tu cuponera, porque acabo de activar automáticamente una sorpresa para ti. Hoy, mi mundo gira como tu desees .</p>
+      </div>
+      <div class="letter-signature">Te amo inmensamente ❤️<br>Tu Cuchurrumi</div>
+    </div>
+
+    <!-- EL CUPÓN AUTOMÁTICO -->
+    <h3 class="gallery-title" style="font-size: 1.8rem; margin-bottom: 1.5rem;">¡Sorpresa Desbloqueada! 🎁</h3>
+    <div class="cuponera-grid">
+      <div class="cupon canjeado" style="cursor: default; transform: none; box-shadow: none;">
+        <s>Válido para decir que sí a todo durante 1 día.</s>
+        <br><span style='font-size: 0.9rem; color: #7A3B1E; margin-top: 0.8rem; display: block; font-weight: bold;'>¡Este cupón ya fue activado automáticamente para ti! ✔️</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function iniciarContador4Meses() {
+    const añoActual = new Date().getFullYear();
+    // Fecha objetivo: 25 de agosto a la medianoche
+    const fechaObjetivo = new Date(`August 24, ${añoActual} 00:00:00`).getTime();
+
+    const intervalo = setInterval(function() {
+      const ahora = new Date().getTime();
+      const distancia = fechaObjetivo - ahora;
+
+      if (distancia < 0) {
+        // El tiempo terminó: ocultamos el contador y mostramos la carta
+        clearInterval(intervalo);
+        document.getElementById('espera-4m').style.display = 'none';
+        document.getElementById('contenido-4m').style.display = 'flex';
+        
+        // --- MAGIA DEL CUPÓN AUTOMÁTICO ---
+        // Le decimos a la "libreta" que el cupón 2 ya se activó automáticamente
+        localStorage.setItem('cupon-2', 'usado'); 
+      } else {
+        const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        const d = dias.toString().padStart(2, '0');
+        const h = horas.toString().padStart(2, '0');
+        const m = minutos.toString().padStart(2, '0');
+        const s = segundos.toString().padStart(2, '0');
+
+        const textoContador = document.getElementById("contador-4m");
+        if (textoContador) {
+          textoContador.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+        }
+      }
+    }, 1000);
+  }
+
+  // Ejecutamos el contador al cargar la pestaña
+  iniciarContador4Meses();
+</script>
